@@ -18,7 +18,9 @@
             <canvas id="game-canvas" width="300" height="600"></canvas>
             <div class="score-container">
                 <h2 id="scoreboard">Score: <span id="score">0</span></h2>
-                <h2 id="highScore">High Score: <span id="score">0</span></h2>
+                <ul id="high-scores">
+                    <!-- High scores will be added here -->
+                </ul>
             </div>
         </div>
     </div>
@@ -41,35 +43,30 @@
         </div>
     </div>
 
-    <!-- Register Modal -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <!-- Add your registration form here -->
-            <h2>Register</h2>
-            <!-- Your registration form elements go here -->
-        </div>
-    </div>
-    <script>
-        function fetchHighScores() {
-          fetch("https://ets-pemrograman-web-f.cyclic.app/scores/score")
-            .then((response) => response.json())
-            .then((data) => {
-              // Mengurutkan data high score dari yang tertinggi
-              const sortedScores = data.sort((a, b) => b.score - a.score);
+     <script>
+        // Fetch high scores from the API
+        fetch("https://ets-pemrograman-web-f.cyclic.app/scores/score")
+            .then(response => response.json())
+            .then(data => {
+                // Sort the scores in descending order
+                console.log(data);
+                data.data.sort((a, b) => b.score - a.score);
 
-              // Mengambil high score tertinggi
-              const highScore = sortedScores[0];
+                // Limit to top 3 scores
+                const topScores = data.data.slice(0, 3);
 
-              // Menampilkan high score di HTML
-              document.getElementById("highScore").textContent = highScore ? highScore.score : "No Data";
+                // Display the top scores in the HTML
+                const highScoresList = document.getElementById("high-scores");
+
+                topScores.forEach(scoreData => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${scoreData.nama}: ${scoreData.score}`;
+                    highScoresList.appendChild(listItem);
+                });
             })
-            .catch((error) => {
-              console.error("Gagal mengambil data high score:", error);
+            .catch(error => {
+                console.error("Error fetching high scores: " + error);
             });
-        }
-
-        // Memanggil fungsi untuk mengambil high score
-        fetchHighScores();
     </script>
      <script src="./auth.js"></script>
     <script src="./constants.js"></script>

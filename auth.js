@@ -1,5 +1,5 @@
        // Cek apakah token ada di localStorage
-        const token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 if (!token) {
     // Token tidak ada, tampilkan modal login
@@ -68,7 +68,7 @@ if (!token) {
                 console.log(data);
             } else {
                 // Handle kesalahan login
-                console.error("Login failed");
+                console.error("Register failed");
             }
         } catch (error) {
             console.error(error);
