@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tetris Game</title>
+    <meta name="description" content="Tetris Game">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="tetris-title">
+            <div class="tetris-text">Tetris</div>
+            <div class="tetris-text">Tetris</div>
+        </div>
+        <div class="game-container">
+            <canvas id="game-canvas" width="300" height="600"></canvas>
+            <div class="score-container">
+                <h2 id="scoreboard">Score: <span id="score">0</span></h2>
+                <h2 id="highScore">High Score: <span id="score">0</span></h2>
+            </div>
+        </div>
+    </div>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+        <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <!-- Add your login form here -->
+            <h2>Login</h2>
+            <!-- Your login form elements go here -->
+            <form>
+                <a href="./register.html">Register dulu</a>
+                <input type="text" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" id="loginButton">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <!-- Add your registration form here -->
+            <h2>Register</h2>
+            <!-- Your registration form elements go here -->
+        </div>
+    </div>
+    <script>
+        function fetchHighScores() {
+          fetch("https://ets-pemrograman-web-f.cyclic.app/scores/score")
+            .then((response) => response.json())
+            .then((data) => {
+              // Mengurutkan data high score dari yang tertinggi
+              const sortedScores = data.sort((a, b) => b.score - a.score);
+
+              // Mengambil high score tertinggi
+              const highScore = sortedScores[0];
+
+              // Menampilkan high score di HTML
+              document.getElementById("highScore").textContent = highScore ? highScore.score : "No Data";
+            })
+            .catch((error) => {
+              console.error("Gagal mengambil data high score:", error);
+            });
+        }
+
+        // Memanggil fungsi untuk mengambil high score
+        fetchHighScores();
+    </script>
+     <script src="./auth.js"></script>
+    <script src="./constants.js"></script>
+    <script src="./piece.js"></script>
+    <script src="./gamemodel.js"></script>
+    <script src="./tetris.js"></script>
+</body>
+</html>
