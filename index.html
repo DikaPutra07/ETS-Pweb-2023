@@ -24,24 +24,6 @@
             </div>
         </div>
     </div>
-    <!--[if lt IE 7]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-        <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <!-- Add your login form here -->
-            <h2>Login</h2>
-            <!-- Your login form elements go here -->
-            <form>
-                <a href="./register.html">Register dulu</a>
-                <input type="text" id="email" placeholder="Email" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit" id="loginButton">Login</button>
-            </form>
-        </div>
-    </div>
 
      <script>
         // Fetch high scores from the API
@@ -68,7 +50,7 @@
                 console.error("Error fetching high scores: " + error);
             });
     </script>
-     <script src="./auth.js"></script>
+    <script src="./middleware.js"></script>
     <script src="./constants.js"></script>
     <script src="./piece.js"></script>
     <script src="./gamemodel.js"></script>
